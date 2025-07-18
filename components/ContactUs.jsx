@@ -126,14 +126,7 @@ https://chat.whatsapp.com/DDBWWqyuGpC3exSWb5y1rN"
             </h2>
             <div className="space-y-6">
               <div className="flex items-center gap-4">
-                <div className="bg-gray-100 p-3 rounded-full">
-                  <Image
-                    src={assets.email_icon}
-                    alt="Email"
-                    width={24}
-                    height={24}
-                  />
-                </div>
+                <div className="bg-gray-100 p-3 rounded-full"></div>
                 <div>
                   <h3 className="font-medium text-gray-800">Email</h3>
                   <Link
@@ -146,14 +139,7 @@ https://chat.whatsapp.com/DDBWWqyuGpC3exSWb5y1rN"
               </div>
 
               <div className="flex items-center gap-4">
-                <div className="bg-gray-100 p-3 rounded-full">
-                  <Image
-                    src={assets.phone_icon}
-                    alt="Phone"
-                    width={24}
-                    height={24}
-                  />
-                </div>
+                <div className="bg-gray-100 p-3 rounded-full"></div>
                 <div>
                   <h3 className="font-medium text-gray-800">Phone</h3>
                   <p className="text-gray-600 text-sm">(+234)813-973-5166</p>
@@ -161,14 +147,7 @@ https://chat.whatsapp.com/DDBWWqyuGpC3exSWb5y1rN"
               </div>
 
               <div className="flex items-center gap-4">
-                <div className="bg-gray-100 p-3 rounded-full">
-                  <Image
-                    src={assets.location_icon}
-                    alt="Location"
-                    width={24}
-                    height={24}
-                  />
-                </div>
+                <div className="bg-gray-100 p-3 rounded-full"></div>
                 <div>
                   <h3 className="font-medium text-gray-800">Location</h3>
                   <p className="text-gray-600 text-sm">

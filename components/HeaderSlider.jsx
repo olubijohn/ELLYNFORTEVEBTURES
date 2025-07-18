@@ -7,26 +7,10 @@ const HeaderSlider = () => {
     {
       id: 1,
       title: "New Arrivals",
-      offer: "Fresh drops from Casablanca",
-      buttonText1: "Shopw",
-      buttonText2: "Find more",
-      imgSrc: assets.header_headphone_image,
-    },
-    {
-      id: 2,
-      title: "Wardrbe Essentials",
-      offer: "Must have items for your closet",
+      offer: "Fresh drops from Ellyn Forte",
       buttonText1: "Shop Now",
-      buttonText2: "Explore Deals",
-      imgSrc: assets.header_playstation_image,
-    },
-    {
-      id: 3,
-      title: "Wardrobe Essentials",
-      offer: "Must have items for your closet",
-      buttonText1: "Order Now",
-      buttonText2: "Learn More",
-      imgSrc: assets.header_macbook_image,
+      buttonText2: "Find more",
+      imgSrc: assets.logo_main,
     },
   ];
 
