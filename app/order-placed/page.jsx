@@ -27,7 +27,7 @@ function OrderPlacedContent() {
       message += `\nDelivery Address:\n${address.fullName}, ${address.area}, ${address.city}, ${address.state}`;
 
       // WhatsApp number (your business number)
-      const phone = "2348131351217"; // Replace with your WhatsApp number (country code + number, no + or spaces)
+      const phone = "2348139735166"; // Replace with your WhatsApp number (country code + number, no + or spaces)
       const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(
         message
       )}`;
