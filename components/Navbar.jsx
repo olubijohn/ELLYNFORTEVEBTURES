@@ -25,6 +25,12 @@ const Navbar = () => {
         <Link href="/all-products" className="hover:text-gray-900 transition">
           Shop
         </Link>
+        <Link href="/about-us" className="hover:text-gray-900 transition">
+          About Us
+        </Link>
+        <Link href="/testimonials" className="hover:text-gray-900 transition">
+          Testimonials
+        </Link>
 
         {isSeller && (
           <button
@@ -92,6 +98,20 @@ const Navbar = () => {
                   label="Products"
                   labelIcon={<BoxIcon />}
                   onClick={() => router.push("/all-products")}
+                />
+              </UserButton.MenuItems>
+              <UserButton.MenuItems>
+                <UserButton.Action
+                  label="About Us"
+                  labelIcon={<BoxIcon />}
+                  onClick={() => router.push("#about-us")}
+                />
+              </UserButton.MenuItems>
+              <UserButton.MenuItems>
+                <UserButton.Action
+                  label="Testimonials"
+                  labelIcon={<BoxIcon />}
+                  onClick={() => router.push("#testimonials")}
                 />
               </UserButton.MenuItems>
               <UserButton.MenuItems>
