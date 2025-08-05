@@ -166,7 +166,7 @@ https://chat.whatsapp.com/DDBWWqyuGpC3exSWb5y1rN"
           </h3>
           <p className="text-gray-600 mb-6">
             Check out our{" "}
-            <Link href="/faq" className="text-blue-600 hover:underline">
+            <Link href="/Faq" className="text-blue-600 hover:underline">
               FAQ page
             </Link>{" "}
             for quick answers to common questions.

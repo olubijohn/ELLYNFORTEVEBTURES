@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { assets } from "@/assets/assets";
 import Image from "next/image";
+import Link from "next/link";
+import { useAppContext } from "@/context/AppContext";
 
 const HeaderSlider = () => {
+  const { router } = useAppContext();
   const sliderData = [
     {
       id: 1,
@@ -45,11 +48,17 @@ const HeaderSlider = () => {
               <h1 className="max-w-lg md:text-[40px] md:leading-[48px] text-2xl font-semibold">
                 {slide.title}
               </h1>
-              <div className="flex items-center mt-4 md:mt-6 ">
-                <button className="md:px-10 px-7 md:py-2.5 py-2 bg-orange-600 rounded-full text-white font-medium">
+              <div className="flex items-center mt-4 md:mt-6">
+                <button
+                  onClick={() => router.push("/")}
+                  className="md:px-10 px-7 md:py-2.5 py-2 bg-orange-600 rounded-full text-white font-medium hover:bg-orange-700 transition-colors"
+                >
                   {slide.buttonText1}
                 </button>
-                <button className="group flex items-center gap-2 px-6 py-2.5 font-medium">
+                <button
+                  onClick={() => router.push("/all-products")}
+                  className="group flex items-center gap-2 px-6 py-2.5 font-medium hover:text-orange-600 transition-colors"
+                >
                   {slide.buttonText2}
                   <Image
                     className="group-hover:translate-x-1 transition"
