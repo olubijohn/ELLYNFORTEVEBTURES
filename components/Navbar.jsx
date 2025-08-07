@@ -1,142 +1,220 @@
 "use client";
-import React from "react";
-import { assets, BagIcon, BoxIcon, CartIcon, HomeIcon } from "@/assets/assets";
-import Link from "next/link";
+import React, { useState } from "react";
 import { useAppContext } from "@/context/AppContext";
+import Link from "next/link";
 import Image from "next/image";
 import { useClerk, UserButton } from "@clerk/nextjs";
 
 const Navbar = () => {
   const { isSeller, router, user } = useAppContext();
   const { openSignIn } = useClerk();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
 
   return (
-    <nav className="flex items-center justify-between px-6 md:px-16 lg:px-32 py-3 border-b border-gray-300 text-gray-700">
-      <Image
-        className="cursor-pointer w-28 md:w-32"
-        onClick={() => router.push("/")}
-        src={assets.logo_main}
-        alt="logo"
-      />
-      <div className="flex items-center gap-4 lg:gap-8 max-md:hidden">
-        <Link href="/" className="hover:text-gray-900 transition">
+    <nav className="relative flex items-center justify-between px-4 sm:px-6 md:px-8 lg:px-16 xl:px-32 py-3 border-b border-gray-300 text-gray-700 bg-white">
+      {/* Logo and Mobile Menu Button */}
+      <div className="flex items-center">
+        <button
+          className="md:hidden mr-4 text-gray-700"
+          onClick={toggleMobileMenu}
+          aria-label="Toggle menu"
+        >
+          {mobileMenuOpen ? (
+            <span className="text-2xl">×</span>
+          ) : (
+            <span className="text-2xl">☰</span>
+          )}
+        </button>
+
+        {/* Logo - Using placeholder initially */}
+      </div>
+
+      {/* Desktop Navigation */}
+      <div className="hidden md:flex items-center gap-4 lg:gap-8">
+        <Link
+          href="/"
+          className="hover:text-gray-900 transition text-sm lg:text-base"
+        >
           Home
         </Link>
-        <Link href="/all-products" className="hover:text-gray-900 transition">
+        <Link
+          href="/all-products"
+          className="hover:text-gray-900 transition text-sm lg:text-base"
+        >
           Shop
         </Link>
-        <Link href="/about-us" className="hover:text-gray-900 transition">
+        <Link
+          href="/about-us"
+          className="hover:text-gray-900 transition text-sm lg:text-base"
+        >
           About Us
         </Link>
-        <Link href="/testimonials" className="hover:text-gray-900 transition">
+        <Link
+          href="/testimonials"
+          className="hover:text-gray-900 transition text-sm lg:text-base"
+        >
           Testimonials
         </Link>
 
         {isSeller && (
           <button
             onClick={() => router.push("/seller")}
-            className="text-xs border px-4 py-1.5 rounded-full"
+            className="text-xs border px-4 py-1.5 rounded-full hover:bg-gray-100 transition"
           >
             Seller Dashboard
           </button>
         )}
       </div>
 
-      <ul className="hidden md:flex items-center gap-4 ">
-        <Image className="w-4 h-4" src={assets.search_icon} alt="search icon" />
+      {/* Desktop Actions */}
+      <div className="hidden md:flex items-center gap-4 lg:gap-6">
+        <button
+          className="p-1 hover:bg-gray-100 rounded-full transition"
+          aria-label="Search"
+        >
+          <span className="text-lg">🔍</span>
+        </button>
         {user ? (
-          <>
-            <UserButton>
-              <UserButton.MenuItems>
-                <UserButton.Action
-                  label="Cart"
-                  labelIcon={<CartIcon />}
-                  onClick={() => router.push("/cart")}
-                />
-              </UserButton.MenuItems>
-              <UserButton.MenuItems>
-                <UserButton.Action
-                  label="My Orders"
-                  labelIcon={<BagIcon />}
-                  onClick={() => router.push("/my-orders")}
-                />
-              </UserButton.MenuItems>
-            </UserButton>
-          </>
+          <div className="flex items-center gap-4">
+            <UserButton afterSignOutUrl="/" />
+            <button
+              onClick={() => router.push("/cart")}
+              className="hover:text-gray-900 transition"
+              aria-label="Cart"
+            >
+              <span className="text-lg">🛒</span>
+            </button>
+            <button
+              onClick={() => router.push("/my-orders")}
+              className="hover:text-gray-900 transition"
+              aria-label="My Orders"
+            >
+              <span className="text-lg">📦</span>
+            </button>
+          </div>
         ) : (
           <button
             onClick={openSignIn}
-            className="flex items-center gap-2 hover:text-gray-900 transition"
+            className="flex items-center gap-2 hover:text-gray-900 transition text-sm lg:text-base"
           >
-            <Image src={assets.user_icon} alt="user icon" />
+            <span className="text-lg">👤</span>
             Account
           </button>
         )}
-      </ul>
+      </div>
 
-      <div className="flex items-center md:hidden gap-3">
-        {isSeller && (
-          <button
-            onClick={() => router.push("/seller")}
-            className="text-xs border px-4 py-1.5 rounded-full"
-          >
-            Seller Dashboard
-          </button>
-        )}
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden absolute top-full left-0 right-0 bg-white z-50 shadow-lg border-t border-gray-200 py-4 px-6">
+          <div className="flex flex-col space-y-4">
+            <Link
+              href="/"
+              className="hover:text-gray-900 transition py-2 border-b border-gray-100"
+              onClick={toggleMobileMenu}
+            >
+              Home
+            </Link>
+            <Link
+              href="/all-products"
+              className="hover:text-gray-900 transition py-2 border-b border-gray-100"
+              onClick={toggleMobileMenu}
+            >
+              Shop
+            </Link>
+            <Link
+              href="/about-us"
+              className="hover:text-gray-900 transition py-2 border-b border-gray-100"
+              onClick={toggleMobileMenu}
+            >
+              About Us
+            </Link>
+            <Link
+              href="/testimonials"
+              className="hover:text-gray-900 transition py-2 border-b border-gray-100"
+              onClick={toggleMobileMenu}
+            >
+              Testimonials
+            </Link>
+
+            <div className="flex flex-col space-y-3 pt-4">
+              {user && (
+                <>
+                  <button
+                    onClick={() => {
+                      router.push("/cart");
+                      toggleMobileMenu();
+                    }}
+                    className="flex items-center gap-2 hover:text-gray-900 transition py-2"
+                  >
+                    <span className="text-lg">🛒</span> Cart
+                  </button>
+                  <button
+                    onClick={() => {
+                      router.push("/my-orders");
+                      toggleMobileMenu();
+                    }}
+                    className="flex items-center gap-2 hover:text-gray-900 transition py-2"
+                  >
+                    <span className="text-lg">📦</span> My Orders
+                  </button>
+                </>
+              )}
+
+              {!user && (
+                <button
+                  onClick={() => {
+                    openSignIn();
+                    toggleMobileMenu();
+                  }}
+                  className="flex items-center gap-2 hover:text-gray-900 transition py-2"
+                >
+                  <span className="text-lg">👤</span> Account
+                </button>
+              )}
+
+              {isSeller && (
+                <button
+                  onClick={() => {
+                    router.push("/seller");
+                    toggleMobileMenu();
+                  }}
+                  className="text-xs border px-4 py-1.5 rounded-full hover:bg-gray-100 transition w-fit"
+                >
+                  Seller Dashboard
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Mobile Actions (always visible) */}
+      <div className="flex md:hidden items-center gap-4">
+        <button className="p-1" aria-label="Search">
+          <span className="text-lg">🔍</span>
+        </button>
         {user ? (
           <>
-            <UserButton>
-              <UserButton.MenuItems>
-                <UserButton.Action
-                  label="Home"
-                  labelIcon={<HomeIcon />}
-                  onClick={() => router.push("/")}
-                />
-              </UserButton.MenuItems>
-              <UserButton.MenuItems>
-                <UserButton.Action
-                  label="Products"
-                  labelIcon={<BoxIcon />}
-                  onClick={() => router.push("/all-products")}
-                />
-              </UserButton.MenuItems>
-              <UserButton.MenuItems>
-                <UserButton.Action
-                  label="About Us"
-                  labelIcon={<BoxIcon />}
-                  onClick={() => router.push("#about-us")}
-                />
-              </UserButton.MenuItems>
-              <UserButton.MenuItems>
-                <UserButton.Action
-                  label="Testimonials"
-                  labelIcon={<BoxIcon />}
-                  onClick={() => router.push("#testimonials")}
-                />
-              </UserButton.MenuItems>
-              <UserButton.MenuItems>
-                <UserButton.Action
-                  label="Cart"
-                  labelIcon={<CartIcon />}
-                  onClick={() => router.push("/cart")}
-                />
-              </UserButton.MenuItems>
-              <UserButton.MenuItems>
-                <UserButton.Action
-                  label="My Orders"
-                  labelIcon={<BagIcon />}
-                  onClick={() => router.push("/my-orders")}
-                />
-              </UserButton.MenuItems>
-            </UserButton>
+            <button
+              onClick={() => router.push("/cart")}
+              className="hover:text-gray-900 transition"
+              aria-label="Cart"
+            >
+              <span className="text-lg">🛒</span>
+            </button>
+            <UserButton afterSignOutUrl="/" />
           </>
         ) : (
           <button
             onClick={openSignIn}
-            className="flex items-center gap-2 hover:text-gray-900 transition"
+            className="hover:text-gray-900 transition"
+            aria-label="Account"
           >
-            <Image src={assets.user_icon} alt="user icon" />
-            Account
+            <span className="text-lg">👤</span>
           </button>
         )}
       </div>
